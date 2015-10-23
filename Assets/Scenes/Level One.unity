@@ -376,6 +376,23 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!1 &1156047600 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 164830, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
+  m_PrefabInternal: {fileID: 165921691}
+--- !u!114 &1156047601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1156047600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e38db185ec74194c86a5561d20ca39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletObject: {fileID: 173124, guid: be205272dcbfbb44f8610a5d241d1560, type: 2}
+  timeDelay: 1
 --- !u!1001 &1716053194
 Prefab:
   m_ObjectHideFlags: 0
