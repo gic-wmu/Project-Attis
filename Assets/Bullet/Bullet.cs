@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-    public float speed = 30;
+	public int damage = 10; //Added by Apol
+	public float speed = 30;
     public Transform target;
 	// Update for physics items
 
@@ -23,6 +24,8 @@ public class Bullet : MonoBehaviour {
     {
         if(co.tag == "Creep")
         {
+			if(co.transform.gameObject.GetComponent<Minion>() != null)
+				co.transform.gameObject.GetComponent<Minion>().Damage(damage);
             Destroy(gameObject);
         }
         

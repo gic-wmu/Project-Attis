@@ -44,7 +44,8 @@ public class PeaTower : MonoBehaviour {
 
     void Shoot()
     {
-        GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
+		GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
+		g.transform.SetParent (gameObject.transform);
         g.GetComponent<Bullet>().target = target.transform;
     }
 }
