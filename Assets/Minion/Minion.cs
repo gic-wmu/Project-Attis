@@ -8,12 +8,10 @@ public class Minion : MonoBehaviour
 	public int Health { get; private set;} // Minion HP
 	public int Bounty { get; private set;} // How much money/points minion drops
 	public float MoveSpeed { get; private set;} // How fast  the minion moves
-	private GameObject startTile, endTile;
+	public GameObject startTile, endTile;
 
 	public void Start()
 	{
-		startTile = GameObject.Find("tileEnter");
-		endTile = GameObject.Find ("tileExit");
 		SetMinionColor (new Color(Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f),Random.Range(0.0f,1.0f)));
 	}
 	public void Update()

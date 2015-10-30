@@ -85,6 +85,10 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &157850729 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 141284, guid: 9fdebb84e556940178290663d262e1f4, type: 2}
+  m_PrefabInternal: {fileID: 1156468901}
 --- !u!1001 &165921691
 Prefab:
   m_ObjectHideFlags: 0
@@ -122,12 +126,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454764, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11442970, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: timeDelay
-      value: 1
+      value: .0500000007
       objectReference: {fileID: 0}
+    - target: {fileID: 11442970, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
+      propertyPath: bulletObject
+      value: 
+      objectReference: {fileID: 100274, guid: 3019568323a89428eb1e1b525d7c208c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
   m_IsPrefabParent: 0
@@ -491,6 +499,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11423494, guid: 81f18ed473e1c4d00aa9a6765c389292, type: 2}
+      propertyPath: startTile
+      value: 
+      objectReference: {fileID: 2107806252}
+    - target: {fileID: 11423494, guid: 81f18ed473e1c4d00aa9a6765c389292, type: 2}
+      propertyPath: endTile
+      value: 
+      objectReference: {fileID: 157850729}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81f18ed473e1c4d00aa9a6765c389292, type: 2}
   m_IsPrefabParent: 0
@@ -610,6 +626,10 @@ Transform:
   - {fileID: 924685753}
   m_Father: {fileID: 430085573}
   m_RootOrder: 1
+--- !u!1 &2107806252 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 142592, guid: 9fdebb84e556940178290663d262e1f4, type: 2}
+  m_PrefabInternal: {fileID: 1156468901}
 --- !u!1001 &2108533010
 Prefab:
   m_ObjectHideFlags: 0

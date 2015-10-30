@@ -9,16 +9,14 @@ public class MinionHoard : MonoBehaviour
 {
 	public List<GameObject> Minions; //Holds a reference to all the minions generated
 	public GameObject MinionTemplate; 
-	private GameObject startTile;
-	private GameObject endTile;
+	public GameObject startTile;
+	public GameObject endTile;
 
 	void Start () 
 	{
 		Minions = new List<GameObject> ();
-		startTile = GameObject.Find("tileEnter");
-		endTile = GameObject.Find ("tileExit");
-		SpawnEnemies (2, 25, 3, 0.1f);
-		SpawnEnemies (1, 100, 3, 0.05f);
+		SpawnEnemies (1, 25, 3, 0.02f);
+		SpawnEnemies (1, 100, 3, 0.01f);
 	}
 	
 	void Update () {}
@@ -32,10 +30,16 @@ public class MinionHoard : MonoBehaviour
 		{
 			minioni = (GameObject) GameObject.Instantiate(
 				MinionTemplate, startTile.transform.position, Quaternion.identity);
-			//minioni.transform.rotation = MinionTemplate.transform.rotation; //Sets minion rotation
+
 			minioni.GetComponent<Minion>().SetMinion(healths, bounties, moveSpeeds, startTile, endTile);
-			Minions.Add (minioni); //Adds minion to list
-			minioni.transform.SetParent (gameObject.transform);//Sets minion as child of this gameObject
+
+			//Adds minioni to list and sets as a child of this gameObject
+			Minions.Add (minioni);
+			minioni.transform.SetParent (gameObject.transform);
+
+			//Sets minio;n's start and end
+			minioni.GetComponent<Minion>().startTile = startTile;
+			minioni.GetComponent<Minion>().endTile = endTile;
 		}
 	}
 

@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
 	public float speed = 30;
     public Transform target;
 	// Update for physics items
+	
 
 	void FixedUpdate () {
         if (target) //if target exists
@@ -27,8 +28,6 @@ public class Bullet : MonoBehaviour {
 			if(co.transform.gameObject.GetComponent<Minion>() != null)
 				co.transform.gameObject.GetComponent<Minion>().Damage(damage);
             Destroy(gameObject);
-        }
-        
+        }   
     }
-
 }
