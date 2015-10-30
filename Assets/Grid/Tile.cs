@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScriptTile : MonoBehaviour {
+public class Tile : MonoBehaviour {
     public GameObject Tower;
 	// Use this for initialization
 	void Start () {
