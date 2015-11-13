@@ -2,56 +2,61 @@
 using System.Collections;
 //Error when enemy has been slain
 
-public class PeaTower : MonoBehaviour {
-    public GameObject bulletObject;
-    public float timeDelay = 1;
-    private Collider target;
-	// Update is called once per frame
-	void Update () {
-       
-    }
+public class PeaTower : MonoBehaviour 
+{
+	public GameObject bulletObject;
+	public float timeDelay = 1;
+	private Collider target = null;
 
-    void OnTriggerEnter(Collider co)
-    {
+	private bool targetLast = false;
 
-        if ((co.tag == "Creep") && !IsInvoking("Shoot"))
-        {
-            target = co;
-            Invoke("Shoot", 0);
-        }
+	void Update () 
+	{
+		//if(target != null)
+		//	DetectingTarget ();
+	}
+	
+	void OnTriggerEnter(Collider co) //When the target gets in range, start shooting at it
+	{
+		if ((co.tag == "Creep") && !IsInvoking("Shoot"))
+		{
+			target = co;
+			Invoke("Shoot", 0);
+		}
+	}
+	
+	void OnTriggerLeave(Collider co) //When target leaves, stop shooting at it
+	{
+		if(co == target)
+			StopCoroutine("Shoot");
+	}
+	
+	void OnTriggerStay(Collider co) //As the target is in range keep shooting at it
+	{
+		if ((co.tag == "Creep") && !IsInvoking("Shoot"))
+		{
+			target = co;
+			Invoke("Shoot", timeDelay);
+		}
+	}
 
+	private void DetectingTarget()//Detects if target has been lost
+	{
+		if (targetLast && TargetExists (target)) //If last updat target existed but this not, then
+			Debug.Log ("Target has been destroyed!");
 
-    }
+		targetLast = TargetExists (target);
+	}
 
-    void OnTriggerLeave(Collider co)
-    {
-        if(co == target)
-        {
-            StopCoroutine("Shoot");
-        }
-        
-    }
-
-    void OnTriggerStay(Collider co)
-    {
-        if ((co.tag == "Creep") && !IsInvoking("Shoot"))
-        {
-            target = co;
-            Invoke("Shoot", timeDelay);
-            //GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
-            //g.GetComponent<Bullet>().target = co.transform;
-        }
-    }
-
-    void Shoot()
-    {
-		//Create pea and set it as a child of this gameObject
+	private bool TargetExists(Collider co) //Detects if collider does not exist
+	{
+		return co.gameObject.GetComponent<SphereCollider>() != null;
+	}
+	
+	void Shoot() // Creates a bullet, sets it a child of this tower, and sets it's target
+	{
 		GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
-		g.transform.SetParent (gameObject.transform);
-
-		if(g.GetComponent<Bullet>()!=null)
-        	g.GetComponent<Bullet>().target = target.transform;
-		else if(g.GetComponent<JuggernautBullet>() != null)
-			g.GetComponent<JuggernautBullet>().target = target.transform;
-    }
+		g.transform.SetParent (gameObject.transform); //Sets bullet as a child of this
+		g.GetComponent<Bullet>().target = target.transform; //Sets the target
+	}
 }

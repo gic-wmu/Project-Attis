@@ -6,15 +6,17 @@ using System.Collections;
 //Error: may go on forever; may die too soon if target dies
 //OntriggerStay to hit the enemy constantly
 
-public class JuggernautBullet : MonoBehaviour 
+public class JuggernautBullet : Bullet 
 {
+	/*
+	override public int damage = 10; 
+	override public float speed = 1f;
+	override public Transform target;*/
+
 	public float MaxDistance = 20; // The maximum distance it can move
-	public int damage = 10; 
-	public float speed = 0.001f;
-	public Transform target;
 	private Vector3 start;
 
-	void Start () 
+	public override void Start () 
 	{
 		start = transform.position;
 		if (target) //If it has a target, then move
@@ -23,7 +25,7 @@ public class JuggernautBullet : MonoBehaviour
 			Destroy (gameObject);
 	}
 
-	void Update () 
+	public override void Update () 
 	{
 		if(IsOutOfRange()) // If out of range, thenn it destroys itself
 		{
@@ -52,7 +54,9 @@ public class JuggernautBullet : MonoBehaviour
 		return Mathf.Sqrt(Mathf.Pow((v.x),2) + Mathf.Pow((v.y),2) + Mathf.Pow((v.z),2));
 	}
 
-	void OnTriggerEnter(Collider co)
+	public override void FixedUpdate(){}
+
+	public override void OnTriggerEnter(Collider co)
 	{
 		if(co.tag == "Creep")
 		{

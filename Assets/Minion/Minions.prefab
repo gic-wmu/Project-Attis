@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11423494}
   m_Layer: 0
   m_Name: Minions
-  m_TagString: Untagged
+  m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Minions: []
   MinionTemplate: {fileID: 113360, guid: b2f843dc171624d52893a6e5576e2e52, type: 2}
+  startTile: {fileID: 0}
+  endTile: {fileID: 0}
 --- !u!114 &11425250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +61,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Creep
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101530}

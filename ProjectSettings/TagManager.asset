@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Creep
   - Bullet
+  - Tower
   layers:
   - Default
   - TransparentFX
