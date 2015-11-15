@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 //Error when enemy has been slain
+//Need a more elgant way to do TargetExists method
+//Stop coroutine shoot before it's updated if target does not exist
 
 public class PeaTower : MonoBehaviour 
 {
@@ -10,11 +12,7 @@ public class PeaTower : MonoBehaviour
 
 	private bool targetLast = false;
 
-	void Update () 
-	{
-		//if(target != null)
-		//	DetectingTarget ();
-	}
+	void Update () {}
 	
 	void OnTriggerEnter(Collider co) //When the target gets in range, start shooting at it
 	{
@@ -40,23 +38,25 @@ public class PeaTower : MonoBehaviour
 		}
 	}
 
-	private void DetectingTarget()//Detects if target has been lost
-	{
-		if (targetLast && TargetExists (target)) //If last updat target existed but this not, then
-			Debug.Log ("Target has been destroyed!");
-
-		targetLast = TargetExists (target);
-	}
-
 	private bool TargetExists(Collider co) //Detects if collider does not exist
 	{
-		return co.gameObject.GetComponent<SphereCollider>() != null;
+		try
+		{
+			return co.attachedRigidbody != null;
+		}
+		catch(MissingReferenceException)
+		{
+			return false;
+		}
 	}
 	
 	void Shoot() // Creates a bullet, sets it a child of this tower, and sets it's target
 	{
-		GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
-		g.transform.SetParent (gameObject.transform); //Sets bullet as a child of this
-		g.GetComponent<Bullet>().target = target.transform; //Sets the target
+		if(TargetExists(target)) //Better to not have this within the Shoot method
+		{
+			GameObject g = (GameObject)Instantiate(bulletObject, transform.position, Quaternion.identity);
+			g.transform.SetParent (gameObject.transform); //Sets bullet as a child of this
+			g.GetComponent<Bullet>().target = target.transform; //Sets the target
+		}
 	}
 }

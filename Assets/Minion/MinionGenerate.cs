@@ -7,8 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MinionGenerate : MonoBehaviour 
-{
-	#region Done
+{ 
 	[Serializable]
 	public class HoardStat
 	{
@@ -35,17 +34,8 @@ public class MinionGenerate : MonoBehaviour
 			if(CanStart(time))
 				TimeActive++;
 		}
-		private void Log(int time)
-		{
-			if(CanStart (time))
-			{
-				Debug.Log (time + ": " + StartTime + ": " + TimeActive);
-				Debug.Log (MinionCount);
-			}
-		}
 		private void GenerateMinion()
 		{
-			Debug.Log ("Generating minion!");
 			GameObject.Find ("Minions").GetComponent<MinionGenerate> ().SpawnEnemy (MinionHealth, MinionWorth, MinionSpeed); 
 			MinionCount--;
 		}
@@ -59,32 +49,64 @@ public class MinionGenerate : MonoBehaviour
 		{
 			return CanStart (time) && !IsDone ();
 		}
-		private bool IsDone() //Is done once all minions are destroyed
+		public bool IsDone() //Is done once all minions are destroyed
 		{
 			return MinionCount <= 0;
 		}
 	}
 
-	public int TimeFromStart { get; private set;}
-	public HoardStat[] Hoards;
+	[Serializable]
+	public class Hoard
+	{
+		public HoardStat[] Hoards;
+		public Hoard(HoardStat[] hoardStat)
+		{
+			Hoards = hoardStat;
+		}
+		public void Update(int time)
+		{
+			for (int i = 0; i < Hoards.Length; i++)
+				Hoards [i].Update (time);
+		}
+		public bool IsDone()
+		{
+			for (int i = 0; i < Hoards.Length; i++)
+				if (!Hoards[i].IsDone ()) //If an item in the HoardStat is not done, then Hoard is not done
+					return false;
+			return true;
+		}
+	}
+
+	public int TimeFromStart { get; private set;}//Time from the start of the wave
 	public List<GameObject> Minions; //Holds a reference to all the minions generated
 	public GameObject MinionTemplate; 
 	public GameObject startTile;
 	public GameObject endTile;
 
+	//For Waves
+	public Hoard[] Waves;
+	public int WaitTime = 100;
+	private int index = 0;
+	private int TimeWaiting = 0;
+
 	void Start () 
 	{
 		TimeFromStart = 0;
 		Minions = new List<GameObject> ();
-		//startTest ();
 	}
 	
 	void Update () 
 	{
-		for (int i = 0; i < Hoards.Length; i++)
-			Hoards [i].Update (TimeFromStart);
+		if (ReadyForNextWave ()) //If ready for the next wave, then move to the next wave
+			ToNextWave ();
 
-		//updateTest ();
+		if(TimeWaiting == WaitTime)//If the wait time is over, then reset the timer since the next wave is starting
+			TimeFromStart = 0;
+
+		if (CanStartWave ())//If the wave can start, then update it
+			Waves [index].Update (TimeFromStart);
+
+		TimeWaiting++;
 		TimeFromStart++;
 	}
 	//Spawns an enemy and adds it to the list of minionsv
@@ -108,23 +130,32 @@ public class MinionGenerate : MonoBehaviour
 	{
 		Minions.Remove (minion);
 	}
-	#endregion
-	//startTest and updateTest are not active
-	/*#region CurrentWork
-	public List<HoardStat[]> Waves;
-	public int WaitTime = 100;
-	public int WaitTimeLeft;
 
-	private void startTest() //for testing
+
+	//These methods relate to Waves
+
+	//Wave can start wave once wait time is over
+	private bool CanStartWave() 
 	{
-		Waves = new List<HoardStat>();
+		return (TimeWaiting >= WaitTime) && index < Waves.Length;
 	}
-	private void updateTest()//for testing
+
+	// Resets wait timer to 0 and moves to the next index
+	private void ToNextWave()
 	{
+		index++;
+		TimeWaiting = 0;
 	}
-	public void SkipWait() //Skips wait by setting waitTimeLeft to 0
+
+	//Is true if all enemies are dead, there's a next wave, and if wave is done
+	public bool ReadyForNextWave()
 	{
-		WaitTimeLeft = 0;
+		return Minions.Count == 0 && index < Waves.Length && Waves [index].IsDone ();
 	}
-	#Endregion*/
+	
+	//Skips wait for the wave to start
+	public void SkipWait() 
+	{
+		TimeWaiting = WaitTime;
+	}
 }

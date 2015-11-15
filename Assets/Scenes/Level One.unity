@@ -94,11 +94,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 454764, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.61000013
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 454764, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 454764, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: m_LocalPosition.z
@@ -126,6 +126,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11442970, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
       propertyPath: timeDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2330510, guid: 00114684c34b3be45a78e56659766ac5, type: 2}
+      propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -340,25 +344,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc926928215a495f9b8783887ef3570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hoards:
-  - DelayBetweenMinions: 100
-    StartTime: 10
-    MinionHealth: 22
-    MinionWorth: 5
-    MinionCount: 5
-    MinionSpeed: .0199999996
-    MinionTemplate: {fileID: 101530, guid: 81f18ed473e1c4d00aa9a6765c389292, type: 2}
-  - DelayBetweenMinions: 50
-    StartTime: 200
-    MinionHealth: 5
-    MinionWorth: 5
-    MinionCount: 3
-    MinionSpeed: .0399999991
-    MinionTemplate: {fileID: 101530, guid: 81f18ed473e1c4d00aa9a6765c389292, type: 2}
   Minions: []
   MinionTemplate: {fileID: 113360, guid: b2f843dc171624d52893a6e5576e2e52, type: 2}
   startTile: {fileID: 1758699833}
   endTile: {fileID: 166920094}
+  Waves:
+  - Hoards:
+    - DelayBetweenMinions: 50
+      StartTime: 10
+      MinionHealth: 15
+      MinionWorth: 10
+      MinionCount: 3
+      MinionSpeed: .0149999997
+      MinionTemplate: {fileID: 113360, guid: b2f843dc171624d52893a6e5576e2e52, type: 2}
+  - Hoards:
+    - DelayBetweenMinions: 20
+      StartTime: 10
+      MinionHealth: 12
+      MinionWorth: 100
+      MinionCount: 5
+      MinionSpeed: .100000001
+      MinionTemplate: {fileID: 113360, guid: b2f843dc171624d52893a6e5576e2e52, type: 2}
+    - DelayBetweenMinions: 20
+      StartTime: 100
+      MinionHealth: 13
+      MinionWorth: 50
+      MinionCount: 2
+      MinionSpeed: .0299999993
+      MinionTemplate: {fileID: 113360, guid: b2f843dc171624d52893a6e5576e2e52, type: 2}
+  WaitTime: 10
 --- !u!1 &924685752
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +501,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 142592, guid: 9fdebb84e556940178290663d262e1f4, type: 2}
+      propertyPath: m_TagString
+      value: Entrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 141284, guid: 9fdebb84e556940178290663d262e1f4, type: 2}
+      propertyPath: m_TagString
+      value: Exit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fdebb84e556940178290663d262e1f4, type: 2}
   m_IsPrefabParent: 0
@@ -555,11 +577,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 407514, guid: 2530a3d801ee14828bc3b3297db36849, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 407514, guid: 2530a3d801ee14828bc3b3297db36849, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 407514, guid: 2530a3d801ee14828bc3b3297db36849, type: 2}
       propertyPath: m_LocalPosition.z
@@ -597,7 +619,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 448182, guid: 2000d5e68a24cd94295e614722965fcd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 448182, guid: 2000d5e68a24cd94295e614722965fcd, type: 2}
       propertyPath: m_LocalPosition.y

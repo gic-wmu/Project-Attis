@@ -7,6 +7,8 @@ TagManager:
   - Creep
   - Bullet
   - Tower
+  - Entrance
+  - Exit
   layers:
   - Default
   - TransparentFX

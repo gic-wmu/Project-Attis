@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11441298}
   - 54: {fileID: 5402232}
   m_Layer: 0
-  m_Name: Test Minion
+  m_Name: Minion
   m_TagString: Creep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d86521d8fa54c1e84f63ae9b359610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTile: {fileID: 0}
+  endTile: {fileID: 0}
 --- !u!114 &11441298
 MonoBehaviour:
   m_ObjectHideFlags: 1

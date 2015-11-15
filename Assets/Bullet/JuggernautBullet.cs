@@ -8,18 +8,13 @@ using System.Collections;
 
 public class JuggernautBullet : Bullet 
 {
-	/*
-	override public int damage = 10; 
-	override public float speed = 1f;
-	override public Transform target;*/
-
 	public float MaxDistance = 20; // The maximum distance it can move
-	private Vector3 start;
+	private Vector3 start; //Its starting point
 
 	public override void Start () 
 	{
 		start = transform.position;
-		if (target) //If it has a target, then move
+		if (target) //Velocity = speed in the direction facing the target
 			GetComponent<Rigidbody> ().velocity = GetUnitVector(target.position - transform.position) * speed;
 		else
 			Destroy (gameObject);
@@ -34,24 +29,14 @@ public class JuggernautBullet : Bullet
 		}
 	}
 	
-	private Vector3 GetUnitVector(Vector3 vector) //Gets the unit vector
+	private Vector3 GetUnitVector(Vector3 vector)
 	{
-		//Returns unit Vector u of Vector v; u = v / |v|
-		return ScaleVector (vector, 1 / GetMagnitude(vector));
+		return (1 / vector.magnitude) * vector;
 	}
-	private Vector3 ScaleVector(Vector3 vector, float scale) //Scales vector by the scale given
+	
+	private bool IsOutOfRange() 
 	{
-		return new Vector3(vector.x * scale, vector.y * scale, vector.z * scale);
-	}
-
-	private bool IsOutOfRange() // Is true if the magnitude of displacement is more than MaxDistance
-	{
-		return GetMagnitude (transform.position - start) >  MaxDistance; 
-	}
-
-	private float GetMagnitude(Vector3 v)
-	{
-		return Mathf.Sqrt(Mathf.Pow((v.x),2) + Mathf.Pow((v.y),2) + Mathf.Pow((v.z),2));
+		return (transform.position - start).magnitude > MaxDistance;
 	}
 
 	public override void FixedUpdate(){}
